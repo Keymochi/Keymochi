@@ -20,6 +20,20 @@
                ReferencedContainer = "container:Keymochi.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "90D53ACC1C834B4D002D1B94"
+               BuildableName = "Keyboard.appex"
+               BlueprintName = "Keyboard"
+               ReferencedContainer = "container:Keymochi.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction

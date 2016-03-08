@@ -1,0 +1,15 @@
+language: objective-c
+branches:
+    only:
+    - master
+osx_image: xcode7.2
+xcode_sdk: iphoneos9.2
+xcode_workspace: Keymochi.xcworkspace
+xcode_scheme: Keymochi
+
+env:
+    global:
+    - WORKSPACE="Keymochi.xcworkspace"
+    - SCHEME="Keymochi"
+    - SDK="iphoneos9.2"
+    - SDK_VERSION="9.2"
