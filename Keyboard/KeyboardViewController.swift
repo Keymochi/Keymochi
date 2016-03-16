@@ -370,7 +370,6 @@ class KeyboardViewController: UIInputViewController {
         
         realm.beginWrite()
         let keyEvent = SymbolKeyEvent()
-        keyEvent.key = sender.text
         keyEvent.downTime = CACurrentMediaTime()
         self.lastKeyEvent = keyEvent
         try! realm.commitWrite()
@@ -382,11 +381,6 @@ class KeyboardViewController: UIInputViewController {
     }
     
     func hidePopupDelay(sender: KeyboardKey) {
-        
-        realm.beginWrite()
-        lastKeyEvent?.upTime = CACurrentMediaTime()
-        realm.add(lastKeyEvent!)
-        try! realm.commitWrite()
         
         self.popupDelayTimer?.invalidate()
         
@@ -864,7 +858,13 @@ class KeyboardViewController: UIInputViewController {
     class var globalColors: GlobalColors.Type { get { return GlobalColors.self }}
     
     func keyPressed(key: Key) {
-        self.textDocumentProxy.insertText(key.outputForCase(self.shiftState.uppercase()))
+        let keyText = key.outputForCase(self.shiftState.uppercase())
+        realm.beginWrite()
+        lastKeyEvent?.upTime = CACurrentMediaTime()
+        (lastKeyEvent as! SymbolKeyEvent).key = keyText
+        realm.add(lastKeyEvent!)
+        try! realm.commitWrite()
+        self.textDocumentProxy.insertText(keyText)
     }
     
     // a banner that sits in the empty space on top of the keyboard
