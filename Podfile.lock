@@ -1,4 +1,5 @@
 PODS:
+  - MotionKit (0.8.1)
   - Realm (0.98.3):
     - Realm/Headers (= 0.98.3)
   - Realm/Headers (0.98.3)
@@ -7,10 +8,12 @@ PODS:
   - SwiftDate (3.0.6)
 
 DEPENDENCIES:
+  - MotionKit
   - RealmSwift
   - SwiftDate
 
 SPEC CHECKSUMS:
+  MotionKit: a88a7d7b5ed6652793a3744f6ca58227d8804236
   Realm: c6a7d00221a2d5177810a674aebd40c5e0b70b0f
   RealmSwift: d6ecad6e4c2a645d6ac956c2c7e9efb375f39c31
   SwiftDate: 520c0e7de224c881fe4213caeca72d482ed3d45f
