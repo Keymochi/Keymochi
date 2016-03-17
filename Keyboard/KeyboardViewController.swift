@@ -8,6 +8,8 @@
 
 import UIKit
 import AudioToolbox
+import MotionKit
+
 import RealmSwift
 
 let metrics: [String:Double] = [
@@ -20,6 +22,8 @@ let kAutoCapitalization = "kAutoCapitalization"
 let kPeriodShortcut = "kPeriodShortcut"
 let kKeyboardClicks = "kKeyboardClicks"
 let kSmallLowercase = "kSmallLowercase"
+
+let RealmQueueLabel = "edu.cornell.tech.keymochi.keyboard.realm"
 
 class KeyboardViewController: UIInputViewController {
     
@@ -170,12 +174,31 @@ class KeyboardViewController: UIInputViewController {
     */
     
     var realm: Realm!
+    let motionKit = MotionKit()
+    
+    let motionUpdateInterval = 0.25
     
     override func viewDidLoad() {
         super.viewDidLoad()
         let directoryURL = NSFileManager.defaultManager().containerURLForSecurityApplicationGroupIdentifier(Constants.groupIdentifier)
         let realmPath = directoryURL?.URLByAppendingPathComponent("db.realm").path
         self.realm = try! Realm.init(path: realmPath!)
+        
+        motionKit.getAccelerationFromDeviceMotion(motionUpdateInterval) { (x, y, z) -> () in
+            DataManager.sharedInatance.saveMotionData((x, y, z), ofSensorType: .Acceleration, atTime: CACurrentMediaTime())
+        }
+        
+        motionKit.getGyroValues(motionUpdateInterval) { (x, y, z) -> () in
+            DataManager.sharedInatance.saveMotionData((x, y, z), ofSensorType: .Gyro, atTime: CACurrentMediaTime())
+        }
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        print("View will disappear")
+        motionKit.stopDeviceMotionUpdates()
+        motionKit.stopGyroUpdates()
+        DataManager.sharedInatance.dumpCurrentMotionSequences()
+        super.viewWillAppear(animated)
     }
     
     var constraintsAdded: Bool = false

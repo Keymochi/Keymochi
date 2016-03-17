@@ -11,6 +11,9 @@
 		901DF4851C8925EE0030E17C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901DF4841C8925EE0030E17C /* Constants.swift */; };
 		901DF4861C89261D0030E17C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901DF4841C8925EE0030E17C /* Constants.swift */; };
 		901DF48C1C8928400030E17C /* DraftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901DF48B1C8928400030E17C /* DraftViewController.swift */; };
+		90B139681C9A177F00C865F0 /* MotionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B139671C9A177F00C865F0 /* MotionData.swift */; };
+		90B139691C9A1AFE00C865F0 /* MotionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B139671C9A177F00C865F0 /* MotionData.swift */; };
+		90B1396B1C9A3A9700C865F0 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B1396A1C9A3A9700C865F0 /* DataManager.swift */; };
 		90C5442E1C84F16F0038C7FE /* DefaultSettings.xib in Resources */ = {isa = PBXBuildFile; fileRef = 90C5441C1C84F16F0038C7FE /* DefaultSettings.xib */; };
 		90C5442F1C84F16F0038C7FE /* Catboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90C5441D1C84F16F0038C7FE /* Catboard.swift */; };
 		90C544301C84F16F0038C7FE /* CatboardBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90C5441E1C84F16F0038C7FE /* CatboardBanner.swift */; };
@@ -93,7 +96,10 @@
 		8ACE810CB583607E551B2298 /* Pods-KeymochiTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KeymochiTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-KeymochiTests/Pods-KeymochiTests.release.xcconfig"; sourceTree = "<group>"; };
 		901DF4841C8925EE0030E17C /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		901DF48B1C8928400030E17C /* DraftViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraftViewController.swift; sourceTree = "<group>"; };
+		905E43EB1C9A07F8009520D9 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		908CC48C14AF1EB88C3E3CD0 /* Pods-Keymochi.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Keymochi.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Keymochi/Pods-Keymochi.debug.xcconfig"; sourceTree = "<group>"; };
+		90B139671C9A177F00C865F0 /* MotionData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MotionData.swift; sourceTree = "<group>"; };
+		90B1396A1C9A3A9700C865F0 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		90B7D0551C85248800BF87C0 /* Keymochi.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Keymochi.entitlements; sourceTree = "<group>"; };
 		90B7D0561C8524A600BF87C0 /* Keyboard.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Keyboard.entitlements; sourceTree = "<group>"; };
 		90C5441C1C84F16F0038C7FE /* DefaultSettings.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DefaultSettings.xib; sourceTree = "<group>"; };
@@ -184,6 +190,7 @@
 		525C5A4A19F0BED20AEAEB5B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				905E43EB1C9A07F8009520D9 /* CoreMotion.framework */,
 				90C544511C84F3360038C7FE /* RealmSwift.framework */,
 				90C5444F1C84F3330038C7FE /* Realm.framework */,
 				90C5444B1C84F31E0038C7FE /* Realm.framework */,
@@ -211,6 +218,7 @@
 			isa = PBXGroup;
 			children = (
 				90D96C9A1C877EC6004508E1 /* KeyEvent.swift */,
+				90B139671C9A177F00C865F0 /* MotionData.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -240,6 +248,7 @@
 				90C5441F1C84F16F0038C7FE /* DefaultKeyboard.swift */,
 				90C544211C84F16F0038C7FE /* DirectionEnum.swift */,
 				90C5442A1C84F16F0038C7FE /* KeyboardModel.swift */,
+				90B1396A1C9A3A9700C865F0 /* DataManager.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -721,6 +730,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				90D53A9E1C834AFA002D1B94 /* ViewController.swift in Sources */,
+				90B139681C9A177F00C865F0 /* MotionData.swift in Sources */,
 				901DF48C1C8928400030E17C /* DraftViewController.swift in Sources */,
 				90D53A9C1C834AFA002D1B94 /* AppDelegate.swift in Sources */,
 				90D96C9B1C877EC6004508E1 /* KeyEvent.swift in Sources */,
@@ -748,6 +758,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				90B139691C9A1AFE00C865F0 /* MotionData.swift in Sources */,
 				901DF4861C89261D0030E17C /* Constants.swift in Sources */,
 				90D96C9C1C8781A2004508E1 /* KeyEvent.swift in Sources */,
 				90C544321C84F16F0038C7FE /* DefaultSettings.swift in Sources */,
@@ -757,6 +768,7 @@
 				90C5443B1C84F16F0038C7FE /* KeyboardLayout.swift in Sources */,
 				90C5443C1C84F16F0038C7FE /* KeyboardModel.swift in Sources */,
 				90C544331C84F16F0038C7FE /* DirectionEnum.swift in Sources */,
+				90B1396B1C9A3A9700C865F0 /* DataManager.swift in Sources */,
 				90C544341C84F16F0038C7FE /* ExtraView.swift in Sources */,
 				90C544361C84F16F0038C7FE /* ImageKey.swift in Sources */,
 				90D53AD01C834B4D002D1B94 /* KeyboardViewController.swift in Sources */,
