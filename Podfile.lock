@@ -3,10 +3,10 @@ PODS:
   - Crashlytics (3.7.0):
     - Fabric (~> 1.6.3)
   - Fabric (1.6.7)
-  - Nimble (5.0.0-alpha.30p1)
+  - Nimble (4.0.0)
   - Parse (1.13.0):
     - Bolts/Tasks (~> 1.6)
-  - Quick (0.9.3)
+  - Quick (0.9.1)
   - Realm (1.0.2):
     - Realm/Headers (= 1.0.2)
   - Realm/Headers (1.0.2)
@@ -17,20 +17,14 @@ PODS:
 DEPENDENCIES:
   - Crashlytics
   - Fabric
-  - Nimble (from `https://github.com/Quick/Nimble.git`, branch `swift-3.0`)
+  - Nimble
   - Parse
-  - Quick (from `https://github.com/Quick/Quick.git`, branch `swift-3.0`)
+  - Quick
   - Realm (from `https://github.com/realm/realm-cocoa.git`, branch `master`)
   - RealmSwift (from `https://github.com/realm/realm-cocoa.git`, branch `master`)
   - SwiftHEXColors
 
 EXTERNAL SOURCES:
-  Nimble:
-    :branch: swift-3.0
-    :git: https://github.com/Quick/Nimble.git
-  Quick:
-    :branch: swift-3.0
-    :git: https://github.com/Quick/Quick.git
   Realm:
     :branch: master
     :git: https://github.com/realm/realm-cocoa.git
@@ -41,18 +35,12 @@ EXTERNAL SOURCES:
     :submodules: true
 
 CHECKOUT OPTIONS:
-  Nimble:
-    :commit: 220152be528dcc0537764c179c95b8174028c80c
-    :git: https://github.com/Quick/Nimble.git
-  Quick:
-    :commit: 81d2a7bd95ef91e2604ee0431bba6fe59ad662dc
-    :git: https://github.com/Quick/Quick.git
   Realm:
-    :commit: 742e530446e7c3b74abdf902b9109ab8f1086753
+    :commit: 103d4c86cc2aa0d3fd2a3b4156dbd65e410ff25e
     :git: https://github.com/realm/realm-cocoa.git
     :submodules: true
   RealmSwift:
-    :commit: 742e530446e7c3b74abdf902b9109ab8f1086753
+    :commit: 103d4c86cc2aa0d3fd2a3b4156dbd65e410ff25e
     :git: https://github.com/realm/realm-cocoa.git
     :submodules: true
 
@@ -60,13 +48,13 @@ SPEC CHECKSUMS:
   Bolts: a0058fa3b331c5a1e4402d534f2dae36dbff31e4
   Crashlytics: c3a2333dea9e2733d2777f730910321fc9e25c0d
   Fabric: caf7580c725e64db144f610ac65cd60956911dc7
-  Nimble: c5b995b4cd57789ec44b0cfb79640fc00e61a8c7
+  Nimble: 72bcc3e2f02242e6bfaaf8d9412ca7bfe3d8b417
   Parse: f51c24d2feb412e4b2d6cc73d37cb24e8d0089bc
-  Quick: 31fb576b6cbb6b028cc5e0016e4366accbb346f5
+  Quick: a5221fc21788b6aeda934805e68b061839bc3165
   Realm: 2948cfa3a05b7acc446abc4c124d443df646c8de
   RealmSwift: 4816c8608630a9a00bba6d726bb30b4bab6dd6bf
   SwiftHEXColors: b0ecc7bd83a1aa2e1956f9ba51f55ebb2bcf86ef
 
-PODFILE CHECKSUM: f66ec3b40f93feb89ace92895d09b96a1c4a8412
+PODFILE CHECKSUM: 447d2101915792f4f269731e24906ad85a268178
 
 COCOAPODS: 1.0.1

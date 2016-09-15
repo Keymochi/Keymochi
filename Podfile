@@ -14,13 +14,13 @@ end
 target 'KeymochiTests' do
     pod 'Realm', git: 'https://github.com/realm/realm-cocoa.git', branch: 'master', submodules: true
     pod 'RealmSwift', git: 'https://github.com/realm/realm-cocoa.git', branch: 'master', submodules: true
-    pod 'Quick', git: 'https://github.com/Quick/Quick.git', branch: 'swift-3.0'
-    pod 'Nimble', git: 'https://github.com/Quick/Nimble.git', branch: 'swift-3.0'
+    pod 'Quick'
+    pod 'Nimble'
 end
 
 target 'KeymochiUITests' do
-    pod 'Quick', git: 'https://github.com/Quick/Quick.git', branch: 'swift-3.0'
-    pod 'Nimble', git: 'https://github.com/Quick/Nimble.git', branch: 'swift-3.0'
+    pod 'Quick'
+    pod 'Nimble'
 end
 
 target 'Keyboard' do
