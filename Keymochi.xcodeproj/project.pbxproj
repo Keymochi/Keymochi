@@ -59,6 +59,7 @@
 		90D96C9C1C8781A2004508E1 /* KeyEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D96C9A1C877EC6004508E1 /* KeyEvent.swift */; };
 		90DC28CC1C9B93B30061455F /* DataChunk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90DC28CB1C9B93B30061455F /* DataChunk.swift */; };
 		90EE30481CB6F488001DB9ED /* DataChunkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EE30471CB6F488001DB9ED /* DataChunkViewController.swift */; };
+		ECAFC0A41D8B9F2F00B1E36D /* GoogleService-Info (1).plist in Resources */ = {isa = PBXBuildFile; fileRef = ECAFC0A31D8B9F2F00B1E36D /* GoogleService-Info (1).plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -169,6 +170,7 @@
 		DCA1EC1FE5F2464F85F03F49 /* Pods-KeymochiTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KeymochiTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KeymochiTests/Pods-KeymochiTests.debug.xcconfig"; sourceTree = "<group>"; };
 		DDECC99E09785093AEFDCD59 /* Pods-KeymochiTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KeymochiTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-KeymochiTests/Pods-KeymochiTests.release.xcconfig"; sourceTree = "<group>"; };
 		E1FE9C91090911DBE79F0689 /* Pods_KeymochiTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KeymochiTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		ECAFC0A31D8B9F2F00B1E36D /* GoogleService-Info (1).plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info (1).plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -334,6 +336,7 @@
 		90D53A8F1C834AFA002D1B94 = {
 			isa = PBXGroup;
 			children = (
+				ECAFC0A31D8B9F2F00B1E36D /* GoogleService-Info (1).plist */,
 				90D53A9A1C834AFA002D1B94 /* Keymochi */,
 				90D53AAF1C834AFA002D1B94 /* KeymochiTests */,
 				90D53ABA1C834AFA002D1B94 /* KeymochiUITests */,
@@ -500,7 +503,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0720;
-				LastUpgradeCheck = 0720;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "Cornell Tech";
 				TargetAttributes = {
 					90D53A971C834AFA002D1B94 = {
@@ -564,6 +567,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9065D1991CA3045100F47855 /* keys.plist in Resources */,
+				ECAFC0A41D8B9F2F00B1E36D /* GoogleService-Info (1).plist in Resources */,
 				90D53AA61C834AFA002D1B94 /* LaunchScreen.storyboard in Resources */,
 				906744221CB7FA9700DABC18 /* Settings.bundle in Resources */,
 				90D53AA31C834AFA002D1B94 /* Assets.xcassets in Resources */,
@@ -895,8 +899,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -940,8 +946,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -960,6 +968,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -969,11 +978,11 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C8B2E11CEBE09CC12E08E4CD /* Pods-Keymochi.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Keymochi/Keymochi.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/build/Debug-iphoneos/Realm",
@@ -993,11 +1002,11 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = DB4E062B338880D08047BA66 /* Pods-Keymochi.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Keymochi/Keymochi.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/build/Debug-iphoneos/Realm",
@@ -1017,6 +1026,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = DCA1EC1FE5F2464F85F03F49 /* Pods-KeymochiTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1036,6 +1046,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = DDECC99E09785093AEFDCD59 /* Pods-KeymochiTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1055,6 +1066,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 8C29724A0B51175E88566E65 /* Pods-KeymochiUITests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				INFOPLIST_FILE = KeymochiUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = edu.cornell.tech.KeymochiUITests;
@@ -1069,6 +1081,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 098057C248A258733AB4D64E /* Pods-KeymochiUITests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				INFOPLIST_FILE = KeymochiUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = edu.cornell.tech.KeymochiUITests;
@@ -1083,6 +1096,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 0BBF077FB57B6EFACD9B78F3 /* Pods-Keyboard.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_ENTITLEMENTS = Keyboard/Keyboard.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -1106,6 +1120,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 0C5A2753386ABB46D759AF0F /* Pods-Keyboard.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_ENTITLEMENTS = Keyboard/Keyboard.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";

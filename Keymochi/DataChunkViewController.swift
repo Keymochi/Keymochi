@@ -9,12 +9,15 @@
 import UIKit
 import Parse
 import RealmSwift
+import Firebase
 
 class DataChunkViewController: UITableViewController {
     
     var realm: Realm!
     var dataChunk: DataChunk!
     var emotionSegmentedControl: UISegmentedControl!
+    var ref: FIRDatabaseReference!
+    var uid: NSString!
     
     @IBOutlet weak var emotionContainer: UIView!
     
@@ -22,6 +25,7 @@ class DataChunkViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.ref = FIRDatabase.database().reference()
         // Do any additional setup after loading the view.
         let segmentedControlWidth = UIScreen.main.bounds.width - 30
         emotionSegmentedControl = UISegmentedControl.init(frame: CGRect(x: 15, y: 7, width: segmentedControlWidth, height: 30))
@@ -45,86 +49,72 @@ class DataChunkViewController: UITableViewController {
     }
     
     @IBAction func uploadDataChunk(_ sender: AnyObject) {
-        let object = PFObject(className: "DataChunk")
-        
         if let userId = UserDefaults.standard.object(forKey: "userid_preference") {
-            object.setObject(userId, forKey: "userId")
-        }
-        
-        var emotion: Emotion!
-        if emotionSegmentedControl.selectedSegmentIndex != -1 {
-            emotion = Emotion.all[emotionSegmentedControl.selectedSegmentIndex]
-            object.setObject(emotion.description, forKey: "emotion")
+            self.uid = userId as! String as NSString!
+            var emotion: Emotion!
+            
+            if emotionSegmentedControl.selectedSegmentIndex != -1 {
+                emotion = Emotion.all[emotionSegmentedControl.selectedSegmentIndex]
+                if let totalNumberOfDeletions = dataChunk.totalNumberOfDeletions {
+                    self.ref.child("users").child(uid as String).child("\(emotion)").updateChildValues(["totalNumDel": totalNumberOfDeletions])
+                }
+                
+                if let interTapDistances = dataChunk.interTapDistances {
+                    self.ref.child("users").child(uid as String).child("\(emotion)").updateChildValues(["interTapDist": interTapDistances])
+                }
+                
+                if let tapDurations = dataChunk.tapDurations {
+                    self.ref.child("users").child(uid as String).child("\(emotion)").updateChildValues(["tapDur": tapDurations])
+                }
+                
+                if let accelerationMagnitudes = dataChunk.accelerationMagnitudes {
+                    self.ref.child("users").child(uid as String).child("\(emotion)").updateChildValues(["accelMag": accelerationMagnitudes])
+                }
+                
+                if let gyroMagnitudes = dataChunk.gyroMagnitudes {
+                    self.ref.child("users").child(uid as String).child("\(emotion)").updateChildValues(["gyroMag": gyroMagnitudes])
+                }
+                
+                if let appVersion = dataChunk.appVersion {
+                    self.ref.child("users").child(uid as String).child("\(emotion)").updateChildValues(["appVer": appVersion])
+                }
+                
+                
+                if let symbolCounts = dataChunk.symbolCounts {
+                    var puncuationCount = 0
+                    for (symbol, count) in symbolCounts {
+                        for scalar in symbol.unicodeScalars {
+                            let value = scalar.value
+                            if (value >= 65 && value <= 90) || (value >= 97 && value <= 122) || (value >= 48 && value <= 57) {
+                                self.ref.child("users").child(uid as String).child("\(emotion)").updateChildValues(["symbol": count])
+                            } else {
+                                puncuationCount += count
+                                switch symbol {
+                                case " ":
+                                    self.ref.child("users").child(uid as String).child("\(emotion)").updateChildValues([ "symbol_space": count])
+                                case "!":
+                                    self.ref.child("users").child(uid as String).child("\(emotion)").updateChildValues(["symbol_exclamation_mark": count])
+                                case ".":
+                                    self.ref.child("users").child(uid as String).child("\(emotion)").updateChildValues([ "symbol_period": count])
+                                case "?":
+                                    self.ref.child("users").child(uid as String).child("\(emotion)").updateChildValues(["symbol_question_mark": count])
+                                default:
+                                    continue
+                                }
+                            }
+                        }
+                    }
+                    self.ref.child("users").child(uid as String).child("\(emotion)").updateChildValues(["symbol_punctuation": puncuationCount])
+                }
+            }
+            
+            
+            
         } else {
             let alert = UIAlertController.init(title: "Error", message: "Please label the emotion for this data chunk.", preferredStyle: .alert)
             alert.addAction(UIAlertAction.init(title: "OK", style: .default, handler: nil))
             self.present(alert, animated: true, completion: nil)
             return
-        }
-        
-        if let symbolCounts = dataChunk.symbolCounts {
-            var puncuationCount = 0
-            for (symbol, count) in symbolCounts {
-                for scalar in symbol.unicodeScalars {
-                    let value = scalar.value
-                    if (value >= 65 && value <= 90) || (value >= 97 && value <= 122) || (value >= 48 && value <= 57) {
-                        object.setObject(count, forKey: "symbol_\(symbol)")
-                    } else {
-                        puncuationCount += count
-                        switch symbol {
-                        case " ":
-                            object.setObject(count, forKey: "symbol_space")
-                        case "!":
-                            object.setObject(count, forKey: "symbol_exclamation_mark")
-                        case ".":
-                            object.setObject(count, forKey: "symbol_period")
-                        case "?":
-                            object.setObject(count, forKey: "symbol_question_mark")
-                        default:
-                            continue
-                        }
-                    }
-                }
-            }
-            object.setObject(puncuationCount, forKey: "symbol_punctuation")
-        }
-        
-        if let totalNumberOfDeletions = dataChunk.totalNumberOfDeletions {
-            object.setObject(totalNumberOfDeletions, forKey: "totalNumberOfDeletions")
-        }
-        
-        if let interTapDistances = dataChunk.interTapDistances {
-            object.setObject(interTapDistances, forKey: "interTapDistances")
-        }
-        
-        if let tapDurations = dataChunk.tapDurations {
-            object.setObject(tapDurations, forKey: "tapDurations")
-        }
-        
-        if let accelerationMagnitudes = dataChunk.accelerationMagnitudes {
-            object.setObject(accelerationMagnitudes, forKey: "accelerationMagnitudes")
-        }
-        
-        if let gyroMagnitudes = dataChunk.gyroMagnitudes {
-            object.setObject(gyroMagnitudes, forKey: "gyroMagnitudes")
-        }
-        
-        if let appVersion = dataChunk.appVersion {
-            object.setObject(appVersion, forKey: "appVersion")
-        }
-        
-        object.saveInBackground { (success, error) in
-            if let error = error {
-                let alert = UIAlertController.init(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
-                alert.addAction(UIAlertAction.init(title: "OK", style: .default, handler: nil))
-                self.present(alert, animated: true, completion: nil)
-                
-            } else if let parseId = object.objectId {
-                DataManager.sharedInatance.updateDataChunk(self.dataChunk, withEmotion: emotion, andParseId: parseId)
-                let alert = UIAlertController.init(title: "DataChunk", message: "Successfully uploaded! \(self.dataChunk.parseId)", preferredStyle: .alert)
-                alert.addAction(UIAlertAction.init(title: "Done", style: .default, handler: nil))
-                self.present(alert, animated: true, completion: nil)
-            }
         }
     }
     

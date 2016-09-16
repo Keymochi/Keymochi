@@ -11,6 +11,7 @@ import Fabric
 import Crashlytics
 import Parse
 import RealmSwift
+import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -58,6 +59,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
         Realm.Configuration.defaultConfiguration = realmConfig
+        FIRApp.configure()
         
         return true
     }

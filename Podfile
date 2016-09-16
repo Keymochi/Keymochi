@@ -9,6 +9,9 @@ target 'Keymochi' do
     pod 'Fabric'
     pod 'Crashlytics'
     pod 'SwiftHEXColors'
+    pod 'Firebase'
+    pod 'Firebase/Core’
+    pod 'Firebase/Database'
 end
 
 target 'KeymochiTests' do
@@ -27,6 +30,10 @@ target 'Keyboard' do
     pod 'Realm', git: 'https://github.com/realm/realm-cocoa.git', branch: 'master', submodules: true
     pod 'RealmSwift', git: 'https://github.com/realm/realm-cocoa.git', branch: 'master', submodules: true
     pod 'SwiftHEXColors'
+    pod 'Firebase'
+    pod 'Firebase/Core’
+    pod 'Firebase/Database'
+
 end
 
 post_install do |installer|
