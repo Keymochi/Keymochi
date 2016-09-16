@@ -12,6 +12,7 @@ import Crashlytics
 import Parse
 import RealmSwift
 import Firebase
+import FirebaseDatabase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -62,6 +63,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FIRApp.configure()
         
         return true
+    }
+    
+    override init() {
+        super.init()
+        FIRApp.configure()
+        // not really needed unless you really need it FIRDatabase.database().persistenceEnabled = true
     }
     
     func applicationWillResignActive(_ application: UIApplication) {

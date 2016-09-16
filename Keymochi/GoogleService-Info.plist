@@ -7,21 +7,21 @@
 	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
 	<string>ca-app-pub-3940256099942544/4411468910</string>
 	<key>CLIENT_ID</key>
-	<string>365074918454-gqui351iq1qsga6ccqka73rr3ab58s48.apps.googleusercontent.com</string>
+	<string>873687389337-m1l16h9uvgjme8iqrj6o23spoi9kbrva.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.365074918454-gqui351iq1qsga6ccqka73rr3ab58s48</string>
+	<string>com.googleusercontent.apps.873687389337-m1l16h9uvgjme8iqrj6o23spoi9kbrva</string>
 	<key>API_KEY</key>
-	<string>AIzaSyBa0UMe9iwNjZMEwI65AWtVK39SKxWeQ_Q</string>
+	<string>AIzaSyARWoe1DLzt5yK85YrojzwHZij1-WO37-w</string>
 	<key>GCM_SENDER_ID</key>
-	<string>365074918454</string>
+	<string>873687389337</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>edu.cornell.tech.Keymochi</string>
 	<key>PROJECT_ID</key>
-	<string>keymochi-82adb</string>
+	<string>keymochi-ead8d</string>
 	<key>STORAGE_BUCKET</key>
-	<string>keymochi-82adb.appspot.com</string>
+	<string>keymochi-ead8d.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<true/>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -33,8 +33,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true/>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:365074918454:ios:8f87d72254e1c191</string>
+	<string>1:873687389337:ios:8f87d72254e1c191</string>
 	<key>DATABASE_URL</key>
-	<string>https://keymochi-82adb.firebaseio.com</string>
+	<string>https://keymochi-ead8d.firebaseio.com</string>
 </dict>
 </plist>

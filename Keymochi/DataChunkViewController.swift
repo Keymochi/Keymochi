@@ -10,6 +10,7 @@ import UIKit
 import Parse
 import RealmSwift
 import Firebase
+import FirebaseDatabase
 
 class DataChunkViewController: UITableViewController {
     
@@ -26,6 +27,8 @@ class DataChunkViewController: UITableViewController {
         super.viewDidLoad()
         
         self.ref = FIRDatabase.database().reference()
+//        self.ref = "https://keymochi-82adb.firebaseio.com/"
+
         // Do any additional setup after loading the view.
         let segmentedControlWidth = UIScreen.main.bounds.width - 30
         emotionSegmentedControl = UISegmentedControl.init(frame: CGRect(x: 15, y: 7, width: segmentedControlWidth, height: 30))
@@ -50,11 +53,13 @@ class DataChunkViewController: UITableViewController {
     
     @IBAction func uploadDataChunk(_ sender: AnyObject) {
         if let userId = UserDefaults.standard.object(forKey: "userid_preference") {
+            print(userId)
             self.uid = userId as! String as NSString!
             var emotion: Emotion!
             
             if emotionSegmentedControl.selectedSegmentIndex != -1 {
                 emotion = Emotion.all[emotionSegmentedControl.selectedSegmentIndex]
+                print(emotion)
                 if let totalNumberOfDeletions = dataChunk.totalNumberOfDeletions {
                     self.ref.child("users").child(uid as String).child("\(emotion)").updateChildValues(["totalNumDel": totalNumberOfDeletions])
                 }
@@ -109,15 +114,17 @@ class DataChunkViewController: UITableViewController {
             }
             
             
-            
-        } else {
+            else {
+            print(emotion)
             let alert = UIAlertController.init(title: "Error", message: "Please label the emotion for this data chunk.", preferredStyle: .alert)
             alert.addAction(UIAlertAction.init(title: "OK", style: .default, handler: nil))
             self.present(alert, animated: true, completion: nil)
             return
+            }
+            
         }
     }
-    
+
     
     // MARK: - Navigation
     
