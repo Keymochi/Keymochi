@@ -12,6 +12,7 @@ target 'Keymochi' do
     pod 'Firebase/Core’
     pod 'Firebase/Database'
     pod 'SwiftDate', git: 'https://github.com/malcommac/SwiftDate.git', branch: 'feature/swift-3.0'
+    pod 'PAM', git: 'https://github.com/Keymochi/PAM.git', branch: 'master'
 end
 
 target 'KeymochiTests' do
