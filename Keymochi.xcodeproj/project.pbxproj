@@ -46,8 +46,6 @@
 		90C5443F1C84F16F0038C7FE /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90C5442D1C84F16F0038C7FE /* Utilities.swift */; };
 		90C544461C84F2BA0038C7FE /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 90C544451C84F2BA0038C7FE /* Media.xcassets */; };
 		90C544491C84F3060038C7FE /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90C544471C84F3060038C7FE /* Realm.framework */; };
-		90D4E0691C9B9D6B00402191 /* Emotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D4E0681C9B9D6B00402191 /* Emotion.swift */; };
-		90D4E06A1C9B9E0900402191 /* Emotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D4E0681C9B9D6B00402191 /* Emotion.swift */; };
 		90D4E06B1C9B9E0900402191 /* DataChunk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90DC28CB1C9B93B30061455F /* DataChunk.swift */; };
 		90D53A9C1C834AFA002D1B94 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D53A9B1C834AFA002D1B94 /* AppDelegate.swift */; };
 		90D53A9E1C834AFA002D1B94 /* DataChunkTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D53A9D1C834AFA002D1B94 /* DataChunkTableViewController.swift */; };
@@ -149,7 +147,6 @@
 		90C5444C1C84F31E0038C7FE /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = "Pods/../build/Debug-iphoneos/RealmSwift/RealmSwift.framework"; sourceTree = "<group>"; };
 		90C5444F1C84F3330038C7FE /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = "Pods/../build/Debug-iphoneos/Realm/Realm.framework"; sourceTree = "<group>"; };
 		90C544511C84F3360038C7FE /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = "Pods/../build/Debug-iphoneos/RealmSwift/RealmSwift.framework"; sourceTree = "<group>"; };
-		90D4E0681C9B9D6B00402191 /* Emotion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Emotion.swift; sourceTree = "<group>"; };
 		90D53A981C834AFA002D1B94 /* Keymochi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Keymochi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		90D53A9B1C834AFA002D1B94 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		90D53A9D1C834AFA002D1B94 /* DataChunkTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataChunkTableViewController.swift; sourceTree = "<group>"; };
@@ -267,7 +264,6 @@
 			isa = PBXGroup;
 			children = (
 				9074C1371CC7D4D100837E99 /* DataManager.swift */,
-				90D4E0681C9B9D6B00402191 /* Emotion.swift */,
 				90DC28CB1C9B93B30061455F /* DataChunk.swift */,
 				90D96C9A1C877EC6004508E1 /* KeyEvent.swift */,
 				90B139671C9A177F00C865F0 /* MotionData.swift */,
@@ -798,7 +794,6 @@
 				90DC28CC1C9B93B30061455F /* DataChunk.swift in Sources */,
 				90EE30481CB6F488001DB9ED /* DataChunkViewController.swift in Sources */,
 				90B139681C9A177F00C865F0 /* MotionData.swift in Sources */,
-				90D4E0691C9B9D6B00402191 /* Emotion.swift in Sources */,
 				90A6E8DF1CB89E340093A2FF /* DataChunkDetailsTableViewController.swift in Sources */,
 				901DF48C1C8928400030E17C /* DraftViewController.swift in Sources */,
 				90D53A9C1C834AFA002D1B94 /* AppDelegate.swift in Sources */,
@@ -831,7 +826,6 @@
 			files = (
 				90734CB51D84BED9008F402A /* KeymochiKeyboardViewController.swift in Sources */,
 				9074C1391CC7D4D100837E99 /* DataManager.swift in Sources */,
-				90D4E06A1C9B9E0900402191 /* Emotion.swift in Sources */,
 				90D4E06B1C9B9E0900402191 /* DataChunk.swift in Sources */,
 				90B139691C9A1AFE00C865F0 /* MotionData.swift in Sources */,
 				901DF4861C89261D0030E17C /* Constants.swift in Sources */,

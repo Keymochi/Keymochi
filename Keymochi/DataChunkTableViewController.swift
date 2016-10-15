@@ -7,6 +7,8 @@
 //
 
 import UIKit
+
+import PAM
 import SwiftDate
 
 class DataChunkTableViewController: UIViewController {
@@ -80,7 +82,7 @@ extension DataChunkTableViewController: UITableViewDataSource {
         let updatedAtLabel    = cell.viewWithTag(101) as! UILabel
         let firebaseKeyLabel  = cell.viewWithTag(102) as! UILabel
         
-        emotionLabel.text = dataChunk.emotion?.description ?? "(unlabeld)"
+        emotionLabel.text = dataChunk.emotion.tag
         firebaseKeyLabel.text = dataChunk.firebaseKey ?? "(unpushed)"
         updatedAtLabel.text = dataChunk.createdAt.inRegion(Region.defaultRegion).description
         

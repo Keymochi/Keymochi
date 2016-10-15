@@ -7,36 +7,42 @@
 //
 
 import Foundation
+
+import Firebase
+import FirebaseAnalytics
+import FirebaseDatabase
 import RealmSwift
+import PAM
 
 class DataManager {
     
     static let sharedInatance = DataManager()
     
-    
     let directoryURL = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: Constants.groupIdentifier)
     let realmPath: String
+    
+    var _realm: Realm?
+    var realm: Realm {
+        set {
+            _realm = newValue
+        }
+        get {
+            if let _realm = _realm {
+                return _realm
+            }
+            return try! Realm(fileURL: URL(fileURLWithPath: self.realmPath))
+        }
+    }
     
     init() {
         realmPath = (directoryURL?.appendingPathComponent("db.realm").path)!
         var realmConfig = Realm.Configuration()
         realmConfig.fileURL = URL(fileURLWithPath: realmPath)
-        realmConfig.schemaVersion = 3
+        realmConfig.schemaVersion = 5
         realmConfig.migrationBlock = { (migration, oldSchemaVersion) in
             if oldSchemaVersion < 1 {
                 migration.enumerateObjects(ofType: DataChunk.className(), { (oldObject, newObject) in
                     newObject!["appVersion"] = "0.2.0"
-                })
-            }
-            if oldSchemaVersion < 2 {
-                migration.enumerateObjects(ofType: DataChunk.className(), { (oldObject, newObject) in
-                    guard let emotionDescription = oldObject!["emotionDescription"] else {
-                        return
-                    }
-                    
-                    if emotionDescription as! String == Emotion.Neutral.description {
-                        newObject!["emotionDescription"] = nil
-                    }
                 })
             }
             if oldSchemaVersion < 3 {
@@ -44,12 +50,11 @@ class DataManager {
                     newObject!["firebaseKey"] = nil
                 })
             }
-            
         }
         Realm.Configuration.defaultConfiguration = realmConfig
     }
     
-    fileprivate let realmQueue = DispatchQueue(label: "com.emomeapp.emome.suggestionQueue", attributes: [])
+    fileprivate let realmQueue = DispatchQueue(label: "edu.cornell.tech.Keymochi.datamanager.realmQueue", attributes: [])
     
     // MARK: - Key Events
     fileprivate var _symbolKeyEventSequence: SymbolKeyEventSequence = SymbolKeyEventSequence()
@@ -77,7 +82,7 @@ class DataManager {
         }
     }
     
-    func dumpCurrentData() {
+    func dumpCurrentData(withEmotion emotion: Emotion) {
         let totalKeyCount =
             _symbolKeyEventSequence.keyEvents.count + _backspaceKeyEventSequence.keyEvents.count
         
@@ -89,7 +94,7 @@ class DataManager {
             print("(\(SensorType.acceleration)) \(_accelerationDataSequence.motionDataPoints.count) data points")
             print("(\(SensorType.gyro)) \(_gyroDataSequence.motionDataPoints.count) data points")
             
-            let dataChunck = DataChunk()
+            let dataChunck = DataChunk(emotion: emotion)
             dataChunck.symbolKeyEventSequence = _symbolKeyEventSequence
             dataChunck.backspaceKeyEventSequence = _backspaceKeyEventSequence
             dataChunck.accelerationDataSequence = _accelerationDataSequence
@@ -107,22 +112,6 @@ class DataManager {
         _accelerationDataSequence = MotionDataSequence.init(sensorType: .acceleration)
         _gyroDataSequence = MotionDataSequence.init(sensorType: .gyro)
     }
-    
-    var _realm: Realm?
-    
-    var realm: Realm {
-        get {
-            if let _realm = _realm {
-                return _realm
-            }
-            return try! Realm(fileURL: URL(fileURLWithPath: self.realmPath))
-        }
-    }
-    
-    func setRealm(_ realm: Realm) {
-        _realm = realm
-    }
-    
 }
 
 extension DataManager {
@@ -179,16 +168,22 @@ extension DataManager {
         try! realm.commitWrite()
     }
     
-    func updateDataChunk(_ dataChunk: DataChunk, withEmotion emotion: Emotion, andParseId parseId: String?) {
-        realm.beginWrite()
-        dataChunk.emotion = emotion
-        dataChunk.parseId = parseId
-        try! realm.commitWrite()
+    func upload(dataChunk: DataChunk) {
+        guard let sharedDefaults = UserDefaults(suiteName: Constants.groupIdentifier) else { return }
+        guard let uid = sharedDefaults.object(forKey: "userid_preference") as? String else { return }
+        guard !uid.isEmpty else { return }
+        guard var data = dataChunk.dictionaryForm else { return }
+        
+        data["user"] = uid
+        
+        var databaseReference: FIRDatabaseReference!
+        databaseReference = FIRDatabase.database().reference().child("users").child(uid).childByAutoId()
+        
+        databaseReference.updateChildValues(data) { (error, refernce) in
+            if error == nil {
+                try! DataManager.sharedInatance.realm.write { dataChunk.firebaseKey = refernce.url }
+            }
+        }
     }
-    
-    func updateDataChunk(_ dataChunk: DataChunk, withEmotion emotion: Emotion) {
-        updateDataChunk(dataChunk, withEmotion: emotion, andParseId: nil)
-    }
-    
     
 }

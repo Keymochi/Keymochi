@@ -1,6 +1,6 @@
 {
   "name": "PAM",
-  "version": "0.0.12",
+  "version": "0.0.14",
   "summary": "A protable implementation of Photographic Affect Meter (PAM)",
   "homepage": "https://github.com/Keymochi/PAM",
   "license": {
@@ -14,7 +14,7 @@
   },
   "source": {
     "git": "https://github.com/Keymochi/PAM.git",
-    "tag": "0.0.12"
+    "tag": "0.0.14"
   },
   "source_files": "PAM/*.swift",
   "ios": {

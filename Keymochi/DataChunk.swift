@@ -8,6 +8,7 @@
 
 import Foundation
 import RealmSwift
+import PAM
 
 class DataChunk: Object {
     
@@ -21,6 +22,11 @@ class DataChunk: Object {
     dynamic var parseId: String?
     dynamic var firebaseKey: String?
     dynamic var appVersion: String? = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
+    dynamic var emotionPosition: Int = 0
+    
+    var emotion: Emotion {
+        return Emotion(position: Position(emotionPosition))!
+    }
     
     override class func primaryKey() -> String? {
         return "realmId"
@@ -38,28 +44,10 @@ class DataChunk: Object {
                       symbolKeyEventCount, accelerationDataPointCount, gyroDataPointCount)
     }
     
-    var emotion: Emotion? {
-        get {
-            guard let emotionDescription = emotionDescription else {
-                return nil
-            }
-            return Emotion(rawValue: emotionDescription)
-        }
-        
-        set {
-            emotionDescription = newValue?.rawValue
-        }
-    }
+    var startTime: Double? { return keyEvents?.first?.downTime }
+    var endTime: Double? { return keyEvents?.last?.upTime }
     
-    var startTime: Double? {
-        return keyEvents?.first?.downTime
-    }
-    
-    var endTime: Double? {
-        return keyEvents?.last?.upTime
-    }
-    
-    var keyEvents: [KeyEvent]? {
+    var keyEvents: [KeyEvent]? {    
         guard symbolKeyEventSequence != nil && backspaceKeyEventSequence != nil else {
             return nil
         }
@@ -79,6 +67,11 @@ class DataChunk: Object {
     
     var gyroDataPoints: [MotionDataPoint]? {
         return gyroDataSequence?.motionDataPoints.map { $0 }
+    }
+    
+    convenience init(emotion: Emotion) {
+        self.init()
+        self.emotionPosition = Int(emotion.position)
     }
 }
 
@@ -136,5 +129,55 @@ extension DataChunk {
     
     var gyroMagnitudes: [Double]? {
         return gyroDataPoints?.map { $0.magnitude }
+    }
+    
+    var dictionaryForm: [String: Any]? {
+        
+        guard let totalNumberOfDeletions = totalNumberOfDeletions,
+            let interTapDistances = interTapDistances,
+            let tapDurations = tapDurations,
+            let accelerationMagnitudes = accelerationMagnitudes,
+            let gyroMagnitudes = gyroMagnitudes,
+            let appVersion = appVersion,
+            let symbolCounts = symbolCounts else {
+                return nil
+        }
+        
+        var dictionary = [String: Any]()
+        dictionary["emotion"] = emotion.tag
+        dictionary["totalNumDel"] = NSNumber(value: totalNumberOfDeletions)
+        dictionary["interTapDist"] = NSArray(array: interTapDistances.map { NSNumber(value: $0) })
+        dictionary["tapDur"] = NSArray(array: tapDurations.map { NSNumber(value: $0) })
+        dictionary["accelMag"] = NSArray(array: accelerationMagnitudes.map { NSNumber(value: $0) })
+        dictionary["gyroMag"] = NSArray(array: gyroMagnitudes.map { NSNumber(value: $0) })
+        dictionary["appVer"] = NSString(string: appVersion)
+        
+        var puncuationCount = 0
+        for (symbol, count) in symbolCounts {
+            for scalar in symbol.unicodeScalars {
+                let value = scalar.value
+                if (value >= 65 && value <= 90) || (value >= 97 && value <= 122) || (value >= 48 && value <= 57) {
+                    dictionary["symbol_\(symbol)"] = NSNumber(value: count)
+                } else {
+                    puncuationCount += count
+                    var key: String!
+                    switch symbol {
+                    case " ":
+                        key = "symbol_space"
+                    case "!":
+                        key = "symbol_exclamation_mark"
+                    case ".":
+                        key = "symbol_period"
+                    case "?":
+                        key = "symbol_question_mark"
+                    default:
+                        continue
+                    }
+                    dictionary[key] = NSNumber(value: count)
+                }
+            }
+            dictionary["symbol_punctuation"] = NSNumber(value: puncuationCount)
+        }
+        return dictionary
     }
 }

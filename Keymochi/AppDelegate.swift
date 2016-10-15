@@ -7,11 +7,13 @@
 //
 
 import UIKit
-import Fabric
+
 import Crashlytics
-import RealmSwift
+import Fabric
 import Firebase
 import FirebaseDatabase
+import PAM
+import RealmSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -27,30 +29,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let realmPath = (directoryURL?.appendingPathComponent("db.realm").path)!
         var realmConfig = Realm.Configuration()
         realmConfig.fileURL = URL.init(string: realmPath)
-        realmConfig.schemaVersion = 3
+        realmConfig.schemaVersion = 5
         realmConfig.migrationBlock = { (migration, oldSchemaVersion) in
-            if oldSchemaVersion < 1 {
-                migration.enumerateObjects(ofType: DataChunk.className(), { (oldObject, newObject) in
-                    newObject!["appVersion"] = "0.2.0"
-                })
-            }
-            
             if oldSchemaVersion < 2 {
-                migration.enumerateObjects(ofType: DataChunk.className(), { (oldObject, newObject) in
-                    guard let emotionDescription = oldObject!["emotionDescription"] else {
-                        return
-                    }
-                    
-                    if emotionDescription as! String == Emotion.Neutral.description {
-                        newObject!["emotionDescription"] = nil
-                    }
-                })
+                migration.enumerateObjects(ofType: DataChunk.className()) { (oldObject, newObject) in
+                    newObject!["appVersion"] = "0.2.0"
+                }
             }
             
             if oldSchemaVersion < 3 {
-                migration.enumerateObjects(ofType: DataChunk.className(), { (oldObject, newObject) in
+                migration.enumerateObjects(ofType: DataChunk.className()) { (oldObject, newObject) in
                     newObject!["firebaseKey"] = nil
-                })
+                }
             }
         }
         Realm.Configuration.defaultConfiguration = realmConfig

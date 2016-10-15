@@ -13,12 +13,12 @@ private enum Constant {
     static let imageExtension = "jpg"
 }
 
-public class PAMImage {
-    public static func loadAllImages(emotion: Emotion) -> [UIImage] {
-        let emotionIndex = emotion.index
+open class PAMImage {
+    open static func loadAllImages(_ emotion: Emotion) -> [UIImage] {
+        let position = emotion.position
         var images = [UIImage]()
         for i in 1...3 {
-            let imagePath = Constant.bundleName.appending("/\(emotionIndex)_\(i)")
+            let imagePath = Constant.bundleName.appending("/\(position)_\(i)")
             let url = Bundle.main.url(forResource: imagePath, withExtension: Constant.imageExtension)
             let imageData = try! Data(contentsOf: url!)
             images.append(UIImage(data: imageData)!)
@@ -27,8 +27,8 @@ public class PAMImage {
         return images
     }
     
-    public static func loadImage(forEmotion emotion: Emotion, atIndex index: Int) -> UIImage {
-        let emotionIndex = emotion.index
+    open static func loadImage(forEmotion emotion: Emotion, atIndex index: Int) -> UIImage {
+        let emotionIndex = emotion.position
         let imagePath = Constant.bundleName.appending("/\(emotionIndex)_\(index)")
         let url = Bundle.main.url(forResource: imagePath, withExtension: Constant.imageExtension)
         let imageData = try! Data(contentsOf: url!)
@@ -36,7 +36,7 @@ public class PAMImage {
         return UIImage(data: imageData)!
     }
     
-    public static func loadRandomImage(forEmotion emotion: Emotion) -> UIImage {
+    open static func loadRandomImage(forEmotion emotion: Emotion) -> UIImage {
         let index = Int(arc4random_uniform(3) + 1)
         return loadImage(forEmotion: emotion, atIndex: index)
     }
