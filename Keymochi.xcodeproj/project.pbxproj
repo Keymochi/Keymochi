@@ -16,6 +16,7 @@
 		901DF4861C89261D0030E17C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901DF4841C8925EE0030E17C /* Constants.swift */; };
 		901DF48C1C8928400030E17C /* DraftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901DF48B1C8928400030E17C /* DraftViewController.swift */; };
 		9044406B1D90715B00FCE1C4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9044406A1D90715B00FCE1C4 /* GoogleService-Info.plist */; };
+		904AE9C41DB2849600D0EE3A /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 904AE9C31DB2849600D0EE3A /* SettingsViewController.swift */; };
 		90564CC61CA3A35700A16866 /* NumericOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90564CC51CA3A35700A16866 /* NumericOperations.swift */; };
 		906255B91CD44E55002EE58C /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 905E43EB1C9A07F8009520D9 /* CoreMotion.framework */; };
 		906255BA1CD44F53002EE58C /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 905E43EB1C9A07F8009520D9 /* CoreMotion.framework */; };
@@ -113,6 +114,7 @@
 		901DF48B1C8928400030E17C /* DraftViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraftViewController.swift; sourceTree = "<group>"; };
 		90410E1D1CBF26DE0066F635 /* KeymochiKeyboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeymochiKeyboardViewController.swift; sourceTree = "<group>"; };
 		9044406A1D90715B00FCE1C4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		904AE9C31DB2849600D0EE3A /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		90564CC51CA3A35700A16866 /* NumericOperations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumericOperations.swift; sourceTree = "<group>"; };
 		905E43EB1C9A07F8009520D9 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		9065D1981CA3045100F47855 /* keys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = keys.plist; sourceTree = "<group>"; };
@@ -256,6 +258,7 @@
 				90EE30471CB6F488001DB9ED /* DataChunkViewController.swift */,
 				90A6E8DE1CB89E340093A2FF /* DataChunkDetailsTableViewController.swift */,
 				901DF48B1C8928400030E17C /* DraftViewController.swift */,
+				904AE9C31DB2849600D0EE3A /* SettingsViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -513,6 +516,7 @@
 						CreatedOnToolsVersion = 7.2.1;
 						DevelopmentTeam = 5LEMESW6GH;
 						LastSwiftMigration = 0800;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -801,6 +805,7 @@
 				90564CC61CA3A35700A16866 /* NumericOperations.swift in Sources */,
 				90D96C9B1C877EC6004508E1 /* KeyEvent.swift in Sources */,
 				901DF4851C8925EE0030E17C /* Constants.swift in Sources */,
+				904AE9C41DB2849600D0EE3A /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -987,6 +992,7 @@
 				CODE_SIGN_ENTITLEMENTS = Keymochi/Keymochi.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 5LEMESW6GH;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/build/Debug-iphoneos/Realm",
@@ -1011,6 +1017,7 @@
 				CODE_SIGN_ENTITLEMENTS = Keymochi/Keymochi.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 5LEMESW6GH;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/build/Debug-iphoneos/Realm",
@@ -1104,6 +1111,7 @@
 				CODE_SIGN_ENTITLEMENTS = Keyboard/Keyboard.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 5LEMESW6GH;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/build/Debug-iphoneos/Realm",
@@ -1128,6 +1136,7 @@
 				CODE_SIGN_ENTITLEMENTS = Keyboard/Keyboard.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 5LEMESW6GH;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/build/Debug-iphoneos/Realm",

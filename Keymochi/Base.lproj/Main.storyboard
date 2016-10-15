@@ -23,7 +23,7 @@
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="KeyEventCell" rowHeight="54" id="tdR-jh-jli">
-                                        <rect key="frame" x="0.0" y="92" width="375" height="54"/>
+                                        <rect key="frame" x="0.0" y="92" width="1000" height="54"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tdR-jh-jli" id="tqD-qV-6Zy">
                                             <frame key="frameInset" width="342" height="54"/>
@@ -33,8 +33,7 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="yYf-W9-PCs">
-                                                    <frame key="frameInset" minX="8" minY="29" width="52" height="15"/>
+                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="yYf-W9-PCs">
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" tag="101" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="starttime" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nyV-dL-hrB">
                                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -304,6 +303,70 @@
             </objects>
             <point key="canvasLocation" x="2719" y="411"/>
         </scene>
+        <!--Settings-->
+        <scene sceneID="OH5-lD-7tO">
+            <objects>
+                <viewController title="Settings" id="RpY-mS-0OZ" customClass="SettingsViewController" customModule="Keymochi" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="e4E-Xq-gIN"/>
+                        <viewControllerLayoutGuide type="bottom" id="Vrf-2X-zdM"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="qO0-RG-hHN">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="27" baselineRelativeArrangement="YES" translatesAutoresizingMaskIntoConstraints="NO" id="12u-8P-33N">
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wEv-sb-QMy">
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DHU-bp-SQz">
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="RpY-mS-0OZ" id="MHq-7U-BuN"/>
+                                        </connections>
+                                    </textField>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Data" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xj5-R3-JgR">
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ta1-0s-dOf">
+                                        <color key="tintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" title="Remove all data"/>
+                                        <connections>
+                                            <action selector="removeAllData:" destination="RpY-mS-0OZ" eventType="touchUpInside" id="BQ0-Cf-Ivg"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="Xj5-R3-JgR" secondAttribute="bottom" constant="28" id="DPT-4f-6hE"/>
+                                    <constraint firstItem="DHU-bp-SQz" firstAttribute="width" secondItem="12u-8P-33N" secondAttribute="width" id="gtf-cK-XaI"/>
+                                    <constraint firstItem="ta1-0s-dOf" firstAttribute="top" secondItem="DHU-bp-SQz" secondAttribute="bottom" constant="20" id="hSJ-5T-bsl"/>
+                                    <constraint firstItem="ta1-0s-dOf" firstAttribute="width" secondItem="12u-8P-33N" secondAttribute="width" id="xCi-OJ-jEl"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="12u-8P-33N" firstAttribute="top" secondItem="e4E-Xq-gIN" secondAttribute="bottom" constant="8" id="CCC-Ak-RXf"/>
+                            <constraint firstItem="12u-8P-33N" firstAttribute="leading" secondItem="qO0-RG-hHN" secondAttribute="leadingMargin" id="HS9-IO-XqV"/>
+                            <constraint firstItem="12u-8P-33N" firstAttribute="centerX" secondItem="qO0-RG-hHN" secondAttribute="centerX" id="VbC-j8-AIP"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Settings" image="ic_settings" id="GeQ-Zk-vn2"/>
+                    <connections>
+                        <outlet property="userIdTextField" destination="DHU-bp-SQz" id="TGJ-dv-5Ap"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1lx-H6-vos" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="360.80000000000001" y="1546.776611694153"/>
+        </scene>
         <!--Draft-->
         <scene sceneID="82S-xX-ZYN">
             <objects>
@@ -383,12 +446,14 @@
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="G32-ay-icf" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="jQz-E2-bw9">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBar>
                     <connections>
                         <segue destination="WJh-qC-r2z" kind="relationship" relationship="viewControllers" id="jaa-EZ-4oI"/>
                         <segue destination="wuU-cV-PdO" kind="relationship" relationship="viewControllers" id="kYR-eJ-djz"/>
+                        <segue destination="RpY-mS-0OZ" kind="relationship" relationship="viewControllers" id="zwS-mY-gcg"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cQM-6h-iwC" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -418,6 +483,7 @@
     <resources>
         <image name="ic_draft" width="24" height="24"/>
         <image name="ic_history" width="24" height="24"/>
+        <image name="ic_settings" width="24" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="YcM-Gl-CHc"/>
