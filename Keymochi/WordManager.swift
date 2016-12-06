@@ -6,55 +6,37 @@
 //  Copyright © 2016 Cornell Tech. All rights reserved.
 //
 
-public func wordSetFromFile(file: String) -> Set<String> {
-    let text = stringFromFile(file: file)!
-    let words = text.characters.split { $0 == "\n" }.map { String($0) }
-    return Set(words)
-}
-
-public func stringFromFile(file:String) -> String? {
-    let path = Bundle.main.path(forResource: file, ofType: "txt")
-//    print("path", path)
-    do { return try String(contentsOfFile: path!) }
-    catch { return .none }
-}
-
-public var positiveWords : Set<String>! =  wordSetFromFile(file: "positive-words")
-public var negativeWords: Set<String>! = wordSetFromFile(file: "negative-words")
-
 import Foundation
 
 class WordManager  {
 
-    var positiveWords : Set<String> =  wordSetFromFile(file: "positive-words")
-    var negativeWords: Set<String> = wordSetFromFile(file: "negative-words")
-    var rating: Float = 1.0000
+    private static var _positiveWords : Set<String>!
+    private static var _negativeWords: Set<String>!
     
-//    init(positiveWords:  Set<String>, negativeWords: Set<String> ) {
-//        self.positiveWords = wordSetFromFile(file: "positive-words.txt")
-//        self.negativeWords = wordSetFromFile(file: "negative-words.txt")
-//       
-//        // do initial setup or establish an initial connection
-//    }
+    public class var positiveWords: Set<String> {
+        if _positiveWords == nil {
+            _positiveWords = self.wordSetFromFile("positive-words")
+        }
+        return _positiveWords
+    }
     
-    func getRating(wordArr: [String]) -> Float {
-        var sum: NSInteger = 0
-        var ratingArr: [NSNumber] = []
-        for unformString in wordArr {
-        let newWord = unformString.lowercased()
-        if positiveWords.contains(newWord) { ratingArr.append(1) }
-        if negativeWords.contains(newWord) { ratingArr.append(-1) }
-        else{
-        ratingArr.append(0)
+    public class var negativeWords: Set<String> {
+        if _negativeWords == nil {
+            _negativeWords = self.wordSetFromFile("negative-words")
         }
-        }
-        for rating in ratingArr {
-        sum = sum + Int(rating)
-        }
-        rating = Float(sum / ratingArr.count)
-
-        
-        return rating
+        return _negativeWords
+    }
+    
+    private class func wordSetFromFile(_  fileName: String) -> Set<String> {
+        let text = stringFromFile(fileName)!
+        let words = text.characters.split { $0 == "\n" }.map { String($0) }
+        return Set(words)
+    }
+    
+    private class func stringFromFile(_ file: String) -> String? {
+        guard let path = Bundle.main.path(forResource: file, ofType: "txt") else { return nil }
+        do { return try String(contentsOfFile: path) }
+        catch { return .none }
     }
 }
 

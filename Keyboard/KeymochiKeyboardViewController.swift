@@ -40,10 +40,11 @@ class KeymochiKeyboardViewController: KeyboardViewController {
 	let lastOpenThreshold: TimeInterval = 5.0
 	let keepUsingThreshold: TimeInterval = 10.0
     
-    var sentiment: Float = 0.50
-    
     var keys = [String]()
     var touchTimestamps = [TouchTimestamp]()
+    
+    var lastText: String!
+    var currentTexts =  [String]()
 	
 	class var kHasAssessedEmotion: String { return "KeyboardHasAssessedEmotion" }
 	class var kKeepUsingTime: String { return "KeyboardKeepUsingTime" }
@@ -83,33 +84,38 @@ class KeymochiKeyboardViewController: KeyboardViewController {
     }
     
     override func viewDidDisappear(_ animated: Bool) {
+        print(self.currentTexts)
         motionManager.stopDeviceMotionUpdates()
         
         assert(keys.count == touchTimestamps.count)
+        
 		let hasAssessedEmotion = defaults.bool(forKey: KeymochiKeyboardViewController.kHasAssessedEmotion)
         if hasAssessedEmotion {
-			if let sentence = textDocumentProxy.documentContextBeforeInput?.components(separatedBy: CharacterSet(charactersIn: " \n")) {
-                sentiment = getSentiment(words: sentence)
-                for (key, touchTimestamp) in zip(keys, touchTimestamps) {
-					
-                    var keyEvent: KeyEvent!
-					
-					if key.characters.count == 1 {
-						keyEvent = SymbolKeyEvent()
-						(keyEvent as! SymbolKeyEvent).key = key
-					} else {
-						let components = key.components(separatedBy: " ")
-						keyEvent = BackspaceKeyEvent()
-						(keyEvent as! BackspaceKeyEvent).numberOfDeletions = Int(components[1])!
-					}
-                    
-                    keyEvent.downTime = touchTimestamp.down
-                    keyEvent.upTime = touchTimestamp.up
-                    
-                    DataManager.sharedInatance.addKeyEvent(keyEvent)
+            
+            let words = (self.currentTexts.reduce([], { return $0 + $1.components(separatedBy: CharacterSet(charactersIn: " \n")) })
+                + wholeSentence.components(separatedBy: CharacterSet(charactersIn: " \n"))).filter { $0 != "" }
+            
+            let sentiment = getSentiment(words: words)
+            
+            for (key, touchTimestamp) in zip(keys, touchTimestamps) {
+                
+                var keyEvent: KeyEvent!
+                
+                if key.characters.count == 1 {
+                    keyEvent = SymbolKeyEvent()
+                    (keyEvent as! SymbolKeyEvent).key = key
+                } else {
+                    let components = key.components(separatedBy: " ")
+                    keyEvent = BackspaceKeyEvent()
+                    (keyEvent as! BackspaceKeyEvent).numberOfDeletions = Int(components[1])!
                 }
-                DataManager.sharedInatance.dumpCurrentData(withEmotion: emotion!, withSentiment: sentiment)
+                
+                keyEvent.downTime = touchTimestamp.down
+                keyEvent.upTime = touchTimestamp.up
+                
+                DataManager.sharedInatance.addKeyEvent(keyEvent)
             }
+            DataManager.sharedInatance.dumpCurrentData(withEmotion: emotion!, withSentiment: sentiment)
         }
 		defaults.set(0.0, forKey: KeymochiKeyboardViewController.kKeepUsingTime)
 		
@@ -293,6 +299,36 @@ class KeymochiKeyboardViewController: KeyboardViewController {
         // add the overlay to the subview
         view.addSubview(overlay)
     }
+    
+    override func textWillChange(_ textInput: UITextInput?) {
+        print("textWillChange")
+        lastText = self.wholeSentence
+        
+        super.textWillChange(textInput)
+    }
+    
+    override func textDidChange(_ textInput: UITextInput?) {
+        print("texDidChange")
+        if wholeSentence == "" && lastText != "" {
+            currentTexts.append(lastText)
+        }
+        
+        super.textDidChange(textInput)
+    }
+    
+    private var wholeSentence: String {
+        if textDocumentProxy.documentContextBeforeInput == nil && textDocumentProxy.documentContextAfterInput == nil {
+            return ""
+        }
+        
+        if let before = textDocumentProxy.documentContextBeforeInput, let after = textDocumentProxy.documentContextAfterInput   {
+            return before + after
+        }
+        
+        return ((textDocumentProxy.documentContextBeforeInput != nil) ?
+            textDocumentProxy.documentContextBeforeInput! :
+            textDocumentProxy.documentContextAfterInput!)
+    }
 }
 
 // MARK: - AutoCorrectionSelectorDelegate Methods
@@ -341,6 +377,6 @@ extension KeymochiKeyboardViewController {
     }
     
     private func getSentimentScore(_ word: String) -> Float {
-        return positiveWords.contains(word) ? 1.0 : (negativeWords.contains(word) ? -1.0 : 0.0)
+        return WordManager.positiveWords.contains(word) ? 1.0 : (WordManager.negativeWords.contains(word) ? -1.0 : 0.0)
     }
 }
