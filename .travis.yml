@@ -5,12 +5,11 @@ xcode_scheme: Keymochi
 xcode_sdk: iphonesimulator10.1
 before_install:
 - openssl aes-256-cbc -K $encrypted_fd1124c3ecb8_key -iv $encrypted_fd1124c3ecb8_iv
-  -in fastlane/session.enc -out fastlane/session -d
-- source fastlane/session
-- openssl aes-256-cbc -K $encrypted_fd1124c3ecb8_key -iv $encrypted_fd1124c3ecb8_iv
-  -in git-crypt.key.enc -out git-crypt.key -d
+  -in ci-secrets.tar.gz.enc -out ci-secrets.tar.gz -d
+- tar zxvf ci-secrets.tar.gz
+- source ci-secrets/fastlane-session
 - brew update && brew install git-crypt
-- git-crypt unlock git-crypt.key
+- git-crypt unlock ci-secrets/git-crypt.key
 install:
 - sudo gem install fastlane --quiet
 before_script:
