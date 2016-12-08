@@ -12,6 +12,8 @@ target 'Keymochi' do
     pod 'Firebase/Messaging'
     pod 'SwiftDate'
     pod 'PAM', git: 'https://github.com/Keymochi/PAM.git', branch: 'master'
+    pod 'Fabric'
+    pod 'Crashlytics'
 end
 
 target 'KeymochiTests' do

@@ -13,6 +13,8 @@ update_fastlane
 # Update this, if you use features of a newer version
 fastlane_version "1.105.0"
 
+generated_fastfile_id "4f8bf3c4-8cc7-4028-b202-8edcd43817c9"
+
 default_platform :ios
 
 platform :ios do
@@ -71,9 +73,13 @@ platform :ios do
       include_bitcode: true,
       clean: true
     ) # Build your app - more options available
-    pilot(
-      skip_waiting_for_build_processing: true
-    )
+    #pilot(
+    #  skip_waiting_for_build_processing: true
+    #)
+    crashlytics(
+      api_token: ENV["CRASHLYTICS_API_TOKEN"],
+      build_secret: ENV["CRASHLYTICS_BUILD_SECRET"]
+        )
 
     # sh "your_script.sh"
     # You can also use other beta testing services here (run `fastlane actions`)

@@ -1,4 +1,7 @@
 PODS:
+  - Crashlytics (3.8.3):
+    - Fabric (~> 1.6.3)
+  - Fabric (1.6.11)
   - Firebase (3.10.0):
     - Firebase/Core (= 3.10.0)
   - Firebase/Core (3.10.0):
@@ -48,6 +51,8 @@ PODS:
   - SwiftHEXColors (1.1.0)
 
 DEPENDENCIES:
+  - Crashlytics
+  - Fabric
   - Firebase
   - Firebase/Core
   - Firebase/Database
@@ -71,6 +76,8 @@ CHECKOUT OPTIONS:
     :git: https://github.com/Keymochi/PAM.git
 
 SPEC CHECKSUMS:
+  Crashlytics: 2b6dbe138a42395577cfa73dfa1aa7248cadf39e
+  Fabric: 5911403591946b8228ab1c51d98f1d7137e863c6
   Firebase: 387f37c7dca894a02708da9ff35ba147040eae9e
   FirebaseAnalytics: 9c67af0ebeb8d2146c9b4ea2616439affa947b58
   FirebaseCore: 1e383fdfe37b6b5d6ff88e84204bdee30276af0f
@@ -88,6 +95,6 @@ SPEC CHECKSUMS:
   SwiftDate: 9aa3259d8850d818bec02802f8f05aa9a8c26fdb
   SwiftHEXColors: 8f7e364df7929e32cff9f9eeb044bb215167d6be
 
-PODFILE CHECKSUM: 8434ed5f417ac6fd9b577afff34ca3312f3301bc
+PODFILE CHECKSUM: c1f59612204ac71398455a2a212f355d067b1148
 
 COCOAPODS: 1.1.1
